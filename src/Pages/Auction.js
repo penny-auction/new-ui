@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import fetch from 'isomorphic-unfetch'
-import { withRouter } from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import LotList from "../Components/LotList/LotList";
 import Header from "../Components/Header/Header";
 
@@ -12,6 +12,7 @@ class Auction extends Component {
             items: null
         };
     }
+
     componentDidMount() {
         let token = localStorage.getItem('penny-auction-token');
         if (token) {
@@ -27,8 +28,9 @@ class Auction extends Component {
             mode: 'cors',
             headers: {
                 "Access-Token": localStorage.getItem('penny-auction-token')
-            }}).then((res)=>res.json().then((data)=>{
-            this.setState({ items: data });
+            }
+        }).then((res) => res.json().then((data) => {
+            this.setState({items: data});
         }));
     }
 
@@ -37,7 +39,7 @@ class Auction extends Component {
             this.state.items ?
                 <div>
                     <Header/>
-                    <LotList items={this.state.items} />
+                    <LotList items={this.state.items}/>
                 </div>
                 : <div className="loader" id="loader-1"/>
         );

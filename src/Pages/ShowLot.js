@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import fetch from 'isomorphic-unfetch'
-import { withRouter } from 'react-router-dom'
-import LotList from "../Components/LotList/LotList";
+import {withRouter} from 'react-router-dom'
 import Header from "../Components/Header/Header";
 
 class ShowLot extends Component {
@@ -16,16 +15,18 @@ class ShowLot extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
     }
+
     onChange(e) {
         this.setState({
             [e.target.name]: e.target.value
         });
         console.log(this.state)
     }
+
     handleSubmit(event) {
         event.preventDefault();
         console.log(this.state)
-        fetch('http://api.penny-auction.cf/lots/'+ this.props.match.params.id + '/bids', {
+        fetch('http://api.penny-auction.cf/lots/' + this.props.match.params.id + '/bids', {
             method: 'POST',
 
             body: JSON.stringify({
@@ -39,6 +40,7 @@ class ShowLot extends Component {
             }
         });
     }
+
     componentDidMount() {
         let token = localStorage.getItem('penny-auction-token');
         if (token) {
@@ -50,52 +52,69 @@ class ShowLot extends Component {
     }
 
     renderItem() {
-        fetch('http://api.penny-auction.cf/lots/'+ this.props.match.params.id , {
+        fetch('http://lapi.penny-auction.cf/lots/' + this.props.match.params.id, {
             mode: 'cors',
             headers: {
                 "Access-Token": localStorage.getItem('penny-auction-token')
-            }}).then((res)=>res.json().then((data)=>{
-            this.setState({ item: data });
+            }
+        }).then((res) => res.json().then((data) => {
+            this.setState({item: data});
         }));
     }
 
     render() {
-        return (
-            this.state.item ?
-            <div>
-            <Header/>
-                <div>
-                    <div className="image">
-                        <img className="image" src={this.state.item.img}/>
-                    </div>
-                    <div className="item_header">
-                        {this.state.item.product_name}
-                        <span className="price">
-                        {this.state.item.final_price}$
-                        <div className="start_price">
-                            {this.state.item.start_price}$
-                        </div>
-                    </span>
-                    </div>
-                    <div >
-                    <span className="tag">
+        let tag
+        if (this.state.item && this.state.item.category.name) {
+            tag = <span className="tag">
                     {this.state.item.category.name}
                     </span>
+
+        } else {
+            tag = ''
+        }
+        return (
+            this.state.item ?
+                <div>
+                    <Header/>
+                    <div className="show-container show-flex">
+                        <div className="">
+                            <img className="image" src={this.state.item.photo}/>
+                        </div>
+                        <div>
+                        <div className="show-info">
+                            <div>
+                                <span className="show-label"> Name: </span>{this.state.item.product_name}
+                            </div>
+                            <div>
+                                <span className="show-label">Current Price: </span>
+                                <span className="show-price"> {this.state.item.final_price}$ </span>
+                            </div>
+                            <div>
+                                <span className="show-label">Start Price: </span> {this.state.item.start_price}$
+                            </div>
+                            <div>
+                                {tag}
+                            </div>
+
+                            <div>
+                                <span className="show-label">Description: </span> {this.state.item.product_description}
+                            </div>
+
+                        </div>
                     </div>
-                    <div className="description">
-                        {this.state.item.product_description}
                     </div>
+
+                    <form className="new-bid-form" onSubmit={this.handleSubmit}>
+                        <div className="float-label">
+                        <input placeholder={"Transaction Id"} id="txid" name="txid" type="number" onChange={this.onChange}/>
+                        <label for="txid" htmlFor="txid">Enter category id</label>
+                        </div>
+                        <button className="btn">Bid</button>
+                    </form>
                 </div>
-                <label htmlFor="txid">Enter category id</label>
-                <form className="new-bid-form" onSubmit={this.handleSubmit}>
-                <input id="txid" name="txid" type="number"  onChange={this.onChange}/>
-                </form>
-            </div>
                 : <div className="loader" id="loader-1"/>
         );
     }
-
 }
 
 export default withRouter(ShowLot);
-
