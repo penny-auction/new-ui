@@ -1,0 +1,5 @@
+name: penny-auction-ui
+description: Penny Auction Web UI application
+apiVersion: v1
+appVersion: develop
+version: 0.0.1
