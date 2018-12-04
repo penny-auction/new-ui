@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Questrial|Quicksand');
+.item {
+    font-family: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", "Fira Sans", Avenir, "Helvetica Neue", "Lucida Grande", sans-serif;
+    flex: 1 0 300px;
+    box-sizing: border-box;
+    color: #171e42;
+    padding: 10px;
+    margin: 10px;
+    transition: transform 1s;
+    max-width: 30%;
+}
+.item:hover {
+     box-shadow: 0 0 20px lightgray;
+     transform: translate(5px, 5px);
+ }
+.item_header {
+    width: 100%;
+    font-size: 16pt;
+    font-weight: bolder;
+    margin-bottom: 20px;
+}
+.price {
+    float: right;
+    color: #DF4B30;
+    text-align: right;
+}
+.start_price {
+    font-size: 9pt;
+    color: grey;
+}
+
+.description {
+    margin-top: 10px;
+    font-size: 10pt;
+    font-weight: lighter;
+}
+.image {
+    width: 200px;
+    height: 200px;
+    margin: auto;
+}
+.tag {
+    background-color: #DF4B30;
+    color: #fff;
+    border-radius: 20px;
+    padding: 5px;
+    font-size: 9pt;
+}

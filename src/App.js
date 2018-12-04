@@ -1,28 +1,26 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { BrowserRouter, Route } from 'react-router-dom';
+import Welcome from './Welcome';
+import Secured from './Secured';
+import Auction from './Pages/Auction'
+import MyLots from './Pages/MyLots'
+import NewLot from './Pages/NewLot'
 import './App.css';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
 
+    render() {
+        return (
+            <BrowserRouter>
+                <div className="container">
+                    <Route exact path="/" component={Welcome} />
+                    <Route path="/secured" component={Secured} />
+                    <Route path="/auction" component={Auction} />
+                    <Route path="/my-lots" component={MyLots} />
+                    <Route path="/new-lot" component={NewLot} />
+                </div>
+            </BrowserRouter>
+        );
+    }
+}
 export default App;
