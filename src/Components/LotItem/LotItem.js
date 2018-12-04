@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
+import ShowLot from "../../Pages/ShowLot";
 
 class LotItem extends Component {
     constructor(props) {
@@ -9,9 +10,11 @@ class LotItem extends Component {
         };
     }
     render() {
-        return (<div className="item">
+        return (
+            <Link to={"/lot/"+this.props.item.id } className="item">
+            <div>
                 <div className="image">
-                    <img className="image" alt="img" src={this.props.item.img}/>
+                    <img className="image" src={this.props.item.img}/>
                 </div>
                 <div className="item_header">
                     {this.props.item.product_name}
@@ -31,6 +34,7 @@ class LotItem extends Component {
                     {this.props.item.product_description}
                 </div>
             </div>
+            </Link>
         );
     }
 }
