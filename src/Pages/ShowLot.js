@@ -52,7 +52,7 @@ class ShowLot extends Component {
     }
 
     renderItem() {
-        fetch('http://lapi.penny-auction.cf/lots/' + this.props.match.params.id, {
+        fetch('http://api.penny-auction.cf/lots/' + this.props.match.params.id, {
             mode: 'cors',
             headers: {
                 "Access-Token": localStorage.getItem('penny-auction-token')
