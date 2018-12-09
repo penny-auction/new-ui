@@ -4,7 +4,7 @@ fullnameOverride: penny-auction-ui
 
 image:
   repository: javatechnologies/penny-auction-ui
-  tag: 0.1.3
+  tag: 0.1.4
 resources:
   requests:
     memory: 64Mi
