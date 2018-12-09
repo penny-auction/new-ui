@@ -6,7 +6,8 @@ node "jenkins-slave", {
 
         stage "Build application", {
             sh "npm config set unsafe-perm true"
-            sh "npm i -g yarn yarn"
+            sh "npm i -g yarn" 
+            sh "yarn"
             sh "yarn build"
         }
 
