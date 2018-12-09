@@ -20,7 +20,7 @@ node "jenkins-slave", {
         }
 
         stage "Deploy", {
-            sh "helm upgrade -i penny-auction-ui helm/penny-auction-ui --recreate-pods"
+            sh "helm upgrade --recreate-pods --namespace default --tiller-namespace default -i penny-auction-ui helm/penny-auction-ui"
         }
     }
 }
