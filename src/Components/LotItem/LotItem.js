@@ -11,7 +11,7 @@ class LotItem extends Component {
 
     render() {
         let tag
-        if (this.props.item.category.name) {
+        if (this.props.item && this.props.item.category && this.props.item.category.name) {
              tag = <span className="tag">
                     {this.props.item.category.name}
                     </span>

@@ -1,6 +1,6 @@
 .items {
     display: flex;
-    margin-top: 70px;
+    margin-top: 20px;
     flex-wrap: wrap;
 }
 .flex_row {

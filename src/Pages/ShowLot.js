@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import fetch from 'isomorphic-unfetch'
 import {withRouter} from 'react-router-dom'
 import Header from "../Components/Header/Header";
+import { fetchLot, postBid, fetchLotBids } from "../utils/api";
+import LotItem from "../Components/LotItem/LotItem";
 
 class ShowLot extends Component {
     constructor(props) {
@@ -9,6 +11,7 @@ class ShowLot extends Component {
         this.state = {
             token: '',
             item: null,
+            bids: null,
             txid: ''
         };
         console.log(this.props)
@@ -20,25 +23,15 @@ class ShowLot extends Component {
         this.setState({
             [e.target.name]: e.target.value
         });
-        console.log(this.state)
     }
 
     handleSubmit(event) {
         event.preventDefault();
         console.log(this.state)
-        fetch('http://api.penny-auction.cf/lots/' + this.props.match.params.id + '/bids', {
-            method: 'POST',
-
-            body: JSON.stringify({
-                txid: this.state.txid
-            }),
-            mode: 'cors',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                "Access-Token": localStorage.getItem('penny-auction-token')
-            }
-        });
+        postBid(this.props.match.params.id, this.state.txid)
+            .then((responseJson) => {
+                  this.props.history.push('/auction')
+            });
     }
 
     componentDidMount() {
@@ -52,14 +45,12 @@ class ShowLot extends Component {
     }
 
     renderItem() {
-        fetch('http://api.penny-auction.cf/lots/' + this.props.match.params.id, {
-            mode: 'cors',
-            headers: {
-                "Access-Token": localStorage.getItem('penny-auction-token')
-            }
-        }).then((res) => res.json().then((data) => {
+        fetchLot(this.props.match.params.id).then((data) => {
             this.setState({item: data});
-        }));
+        });
+        fetchLotBids(this.props.match.params.id).then((data) => {
+            this.setState({bids: data});
+        });
     }
 
     render() {
@@ -72,13 +63,14 @@ class ShowLot extends Component {
         } else {
             tag = ''
         }
+
         return (
             this.state.item ?
                 <div>
                     <Header/>
                     <div className="show-container show-flex">
                         <div className="">
-                            <img className="image" src={this.state.item.photo}/>
+                            <img className="image big-photo" src={this.state.item.photo}/>
                         </div>
                         <div>
                         <div className="show-info">
@@ -102,12 +94,21 @@ class ShowLot extends Component {
 
                         </div>
                     </div>
+                        <div className='show-bids'>
+                            <ul>
+                                {
+                                this.state.bids.map(function (x) {
+                                    return <li item={x} className=""> {x.txid}</li>
+                                })
+                            }
+                            </ul>
+                        </div>
                     </div>
 
                     <form className="new-bid-form" onSubmit={this.handleSubmit}>
                         <div className="float-label">
-                        <input placeholder={"Transaction Id"} id="txid" name="txid" type="number" onChange={this.onChange}/>
-                        <label for="txid" htmlFor="txid">Enter category id</label>
+                        <input placeholder={"Transaction Id"} id="txid" name="txid" type="text" onChange={this.onChange}/>
+                        <label for="txid" htmlFor="txid">Enter transaction id</label>
                         </div>
                         <button className="btn">Bid</button>
                     </form>

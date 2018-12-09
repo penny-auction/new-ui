@@ -3,6 +3,7 @@ import fetch from 'isomorphic-unfetch'
 import {withRouter} from 'react-router-dom'
 import LotList from "../Components/LotList/LotList";
 import Header from "../Components/Header/Header";
+import { fetchLotsOfUser } from "../utils/api"
 
 class MyLots extends Component {
     constructor(props) {
@@ -24,14 +25,9 @@ class MyLots extends Component {
     }
 
     renderItems() {
-        fetch('http://api.penny-auction.cf/self/lots', {
-            mode: 'cors',
-            headers: {
-                "Access-Token": localStorage.getItem('penny-auction-token')
-            }
-        }).then((res) => res.json().then((data) => {
+        fetchLotsOfUser().then((data) => {
             this.setState({items: data});
-        }));
+        });
     }
 
     render() {
@@ -39,6 +35,7 @@ class MyLots extends Component {
             this.state.items ?
                 <div>
                     <Header/>
+                    <h2>My Lots</h2>
                     <LotList items={this.state.items}/>
                 </div>
                 : <div className="loader" id="loader-1"/>
