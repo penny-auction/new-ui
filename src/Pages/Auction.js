@@ -3,14 +3,17 @@ import fetch from 'isomorphic-unfetch'
 import {withRouter} from 'react-router-dom'
 import LotList from "../Components/LotList/LotList";
 import Header from "../Components/Header/Header";
+import SearchBar from "../Components/SearchBar/SearchBar";
 
 class Auction extends Component {
     constructor(props) {
         super(props);
         this.state = {
             token: '',
-            items: null
+            items: null,
+            allItems: null,
         };
+        this.searchItems = this.searchItems.bind(this);
     }
 
     componentDidMount() {
@@ -22,7 +25,9 @@ class Auction extends Component {
             this.props.history.push('/');
         }
     }
-
+    searchItems(data){
+      this.setState({items: data});
+    }
     renderItems() {
         fetch('http://api.penny-auction.cf/lots', {
             mode: 'cors',
@@ -30,7 +35,8 @@ class Auction extends Component {
                 "Access-Token": localStorage.getItem('penny-auction-token')
             }
         }).then((res) => res.json().then((data) => {
-            this.setState({items: data});
+            const result = data.filter(el => el.category !== null);
+            this.setState({items: result, allItems: result});
         }));
     }
 
@@ -39,7 +45,8 @@ class Auction extends Component {
             this.state.items ?
                 <div>
                     <Header/>
-                    <LotList items={this.state.items}/>
+                    <SearchBar searchItems={this.searchItems} items={this.state.items} allItems={this.state.allItems}/>
+                    <LotList items={this.state.items} />
                 </div>
                 : <div className="loader" id="loader-1"/>
         );
