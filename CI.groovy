@@ -5,10 +5,8 @@ node "jenkins-slave", {
         }
 
         stage "Build application", {
-            container "nodejs", {
-                sh "npm i -g yarn yarn"
-                sh "yarn build"
-            }
+            sh "npm i -g yarn yarn"
+            sh "yarn build"
         }
 
         stage "Build and push Docker image", {
