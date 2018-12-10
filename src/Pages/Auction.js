@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import fetch from 'isomorphic-unfetch'
-import {withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom';
 import LotList from "../Components/LotList/LotList";
 import Header from "../Components/Header/Header";
 import SearchBar from "../Components/SearchBar/SearchBar";
-import { fetchLots } from "../utils/api"
+import {fetchLots} from "../utils/api";
 
 class Auction extends Component {
     constructor(props) {
@@ -26,13 +25,15 @@ class Auction extends Component {
             this.props.history.push('/');
         }
     }
-    searchItems(data){
-      this.setState({items: data});
+
+    searchItems(data) {
+        this.setState({items: data});
     }
+
     renderItems() {
         fetchLots().then((data) => {
-        const result = data.filter(el => el.category !== null);
-        this.setState({items: result, allItems: result});
+            const result = data.filter(el => el.category !== null);
+            this.setState({items: result, allItems: result});
         });
     }
 

@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import fetch from 'isomorphic-unfetch'
-import { withRouter } from 'react-router-dom'
+import {withRouter} from 'react-router-dom';
 import Header from "../Components/Header/Header";
-import { postLot } from '../utils/api'
+import {postLot} from '../utils/api';
 
 class NewLot extends Component {
     constructor() {
@@ -34,7 +33,11 @@ class NewLot extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        postLot(this.state.product_name, this.state.start_price, this.state.product_description, this.state.category_id, this.state.photo)
+        postLot(this.state.product_name,
+                this.state.start_price,
+                this.state.product_description,
+                this.state.category_id,
+                this.state.photo)
             .then((responseJson) => {
                 this.props.history.push('/my-lots');
             });
@@ -48,25 +51,29 @@ class NewLot extends Component {
 
                     <div className="float-label">
 
-                        <input placeholder={"Start Price"} id="start_price" name="start_price" type="number" onChange={this.onChange} />
+                        <input placeholder={"Start Price"} id="start_price" name="start_price" type="number"
+                               onChange={this.onChange}/>
                         <label htmlFor="start_price">Enter start price</label>
                     </div>
                     <div className="float-label">
-                        <input placeholder={"Product Name"} id="product_name" name="product_name" type="text" onChange={this.onChange} />
+                        <input placeholder={"Product Name"} id="product_name" name="product_name" type="text"
+                               onChange={this.onChange}/>
                         <label htmlFor="product_name">Enter product name</label>
                     </div>
 
                     <div className="float-label">
 
-                        <input placeholder={"Product Description"} id="product_description" name="product_description" type="text" onChange={this.onChange} />
+                        <input placeholder={"Product Description"} id="product_description" name="product_description"
+                               type="text" onChange={this.onChange}/>
                         <label htmlFor="product_description">Enter product description</label>
                     </div>
                     <div className="float-label">
-                        <input placeholder={"Category Id"} id="category_id" name="category_id" type="number"  onChange={this.onChange}/>
+                        <input placeholder={"Category Id"} id="category_id" name="category_id" type="number"
+                               onChange={this.onChange}/>
                         <label htmlFor="category_id">Enter category id</label>
                     </div>
                     <div className="float-label">
-                        <input placeholder={"Photo"} id="photo" name="photo" type="text"  onChange={this.onChange}/>
+                        <input placeholder={"Photo"} id="photo" name="photo" type="text" onChange={this.onChange}/>
                         <label htmlFor="photo">Enter category id</label>
                     </div>
                     <button type="submit" form="new-lot-form" className="btn">Create lot</button>

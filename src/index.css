@@ -168,6 +168,18 @@ a{
   background: white;
   z-index: 0;
 }
+.float-label-simple {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  width: 100%;
+  border: solid 1px #eeeeee;
+  font-size: 14px;
+  line-height: 1em;
+  padding: 10px;
+  background: white;
+  z-index: 0;
+}
 .float-label input + label,
 .float-label textarea + label {
   -moz-transition: all 0.2s ease-out;
@@ -222,7 +234,7 @@ body {
 
 form {
   display: block;
-  margin: 25px auto;
+  margin: 5px auto;
   width: 325px;
 }
 
@@ -247,7 +259,6 @@ h2 {
   margin-left: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   height: 100%;
 }
 
@@ -268,4 +279,221 @@ button {
   width: 300px;
 }
 
+.show-bids {
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*justify-content: space-between;*/
+  overflow: auto;
+  min-width: 300px;
+}
+
+.show-bids-list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.show-bids-item{
+  display: flex;
+  justify-content: space-between;
+}
+
+.label-big {
+  font-size: 16pt;
+}
+
+.centered {
+  text-align: center;
+}
+
+.field-container {
+  position: relative;
+  border: 1px solid #bcbaba;
+  height: 50px;
+  width: 320px;
+  padding-left: 12px;
+  margin-left: 10px;
+}
+
+.field-placeholder {
+  position: absolute;
+  top: 50%;
+  transform: translate(5px, -50%);
+  pointer-events: none;
+  transition: all 0.14s ease-in-out;
+  font-size: 15px;
+}
+
+input[type="text"].field-input {
+  color: #000;
+  border: none;
+  padding: 5px;
+  margin-top: 20px;
+  font-size: 16px;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  bottom: 0px;
+  background: #EAEBED;
+}
+input[type="text"].field-input:focus {
+  outline: none;
+}
+input[type="text"].field-input.c-fix, input[type="text"].field-input:focus, input[type="text"].field-input:not(:placeholder-shown) {
+  border-color: transparent;
+}
+input[type="text"].field-input.c-fix ~ label, input[type="text"].field-input:focus ~ label, input[type="text"].field-input:not(:placeholder-shown) ~ label {
+  color: #646669;
+  font-size: 11px;
+  top: calc(30% - 0.5rem);
+  transform: translate(5px, 0%);
+}
+input[type="text"].field-input::-webkit-input-placeholder {
+  color: transparent;
+}
+input[type="text"].field-input::-moz-placeholder {
+  color: transparent;
+}
+input[type="text"].field-input:-ms-input-placeholder {
+  color: transparent;
+}
+
+.autocomplete-drop-down {
+  position: relative;
+  width: 30vw;
+}
+
+.countries-input,
+.countries-list {
+  border: none;
+  box-sizing: border-box;
+  width: 30vw;
+}
+
+.countries-input-container {
+  height: 2.5rem;
+  position: relative;
+}
+
+.countries-input {
+  height: 2.5rem;
+  padding: 1em 0.5em;
+  position: relative;
+  transition: outline 0.2s ease;
+  transition-delay: 0.2s;
+}
+.countries-input:focus + .input-underline {
+  transform: scaleY(0);
+}
+.countries-input:focus ~ .input-arrow {
+  transform: rotate(180deg);
+}
+
+.input-underline {
+  background: #000;
+  bottom: 0;
+  content: '';
+  height: 2px;
+  left: 0;
+  position: absolute;
+  transform-origin: center bottom;
+  transition: transform 0.3s ease;
+  width: 30vw;
+}
+
+.input-arrow {
+  position: absolute;
+  right: 0.5em;
+  top: calc(50% - 0.5rem);
+  transition: transform 0.3s ease;
+}
+
+.countries-list-container {
+  box-shadow: 0 8px 15px 0 rgba(33, 33, 33, 0.2);
+  opacity: 0;
+  position: relative;
+  transform: scaleY(0);
+  visibility: hidden;
+  transform-origin: center top;
+  transition: all 0.3s ease;
+  width: 30vw;
+}
+.countries-list-container.visible {
+  opacity: 1;
+  transform: scaleY(1);
+  visibility: visible;
+}
+
+.countries-list {
+  align-content: middle;
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 11.5em;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: 30vw;
+}
+
+.country {
+  cursor: pointer;
+  padding: 0.5em 0;
+  transition: background 0.5s ease;
+  width: 30vw;
+}
+.country:hover {
+  background: #CCC;
+}
+.country span {
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+.country--abbreviation {
+  padding: 0 1em;
+  width: 18%;
+}
+
+.country--name {
+  width: 78%;
+}
+
+
+table {
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: block;
+  table-layout: fixed;
+  height: 300px;
+  overflow-y: scroll;
+}
+
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+
+table tr {
+  background-color: #EAEBED;
+  border: 1px solid #EAEBED;
+  padding: .35em;
+}
+
+table th,
+table td {
+  padding: .625em;
+  text-align: center;
+}
+
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.label-bids {
+  margin-left: 10px;
+}
 

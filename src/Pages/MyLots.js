@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import fetch from 'isomorphic-unfetch'
-import {withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom';
 import LotList from "../Components/LotList/LotList";
 import Header from "../Components/Header/Header";
-import { fetchLotsOfUser } from "../utils/api"
+import {fetchLotsOfUser} from "../utils/api";
 
 class MyLots extends Component {
     constructor(props) {

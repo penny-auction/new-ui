@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-unfetch';
 
-const rootPath = "http://localhost:8080";
-const token = "eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMiwicHJlZmVycmVkX3VzZXJuYW1lIjoia2VrIn0.lVOalnggcln_P3PxjbpNxNcWO-Fx-VuaezQM6zpuLk0UE-2XwaNF5sY0ypPTSnOtJumcQ2-1oWg5IUh-d6heImZrdIJ7VUq2_7MlEvHMySwnQgUvDYaK0II0uykSFYuP5HuFkPBXLz9uOMdy2hEMbA5iBpxuzYc4tpc7vlZH2Us"
+const rootPath = "http://api.penny-auction.cf";
+const token = localStorage.getItem('penny-auction-token');
 
 export const fetchLotsOfUser = () => {
     return fetch(rootPath  + '/self/lots', {

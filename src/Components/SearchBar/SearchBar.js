@@ -7,7 +7,7 @@ class SearchBar extends Component {
         super(props);
         this.state = {
           inputValue1: '',
-          inputValue2: Infinity,
+          inputValue2: '',
         };
         this.handleChange1 = this.handleChange1.bind(this);
         this.handleChange2 = this.handleChange2.bind(this);
@@ -46,14 +46,17 @@ class SearchBar extends Component {
     render () {
         let searchBlock = [
           <div className="search">
+
+              <div className='field-container' >
             <input
               type="text"
               name="question1"
-              placeholder="Seacrh"
+              placeholder=" "
               autoComplete="off"
               onChange={this.handleChange1}
               value={this.state.inputValue1}
-              className='input'
+              className='field-input'
+              id="inputid"
               onKeyDown={(e) => {
                 if (e.keyCode === 13) {
                   e.preventDefault();
@@ -61,14 +64,18 @@ class SearchBar extends Component {
                 }
               }}
             />
+                  <label className="field-placeholder" htmlFor="question1">Search</label>
+              </div>
+              <div className="field-container">
             <input
-              type="number"
+              type="text"
               name="question2"
-              placeholder="Seacrh only by price"
+              placeholder=" "
               autoComplete="off"
               onChange={this.handleChange2}
               value={this.state.inputValue2}
-              className='input'
+              className='field-input'
+              id="inputid"
               onKeyDown={(e) => {
                 if (e.keyCode === 13) {
                   e.preventDefault();
@@ -76,6 +83,8 @@ class SearchBar extends Component {
                 }
               }}
             />
+                  <label className="field-placeholder" htmlFor="question2">Search by price</label>
+              </div>
           </div>,
         ]
         return searchBlock;

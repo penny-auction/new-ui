@@ -1,24 +1,11 @@
 .search {
     display: flex;
+    position: absolute;
+    top:46px;
     width: 100%;
     height: 60px;
     align-items: center;
     border-bottom: 2px solid black;
     flex-wrap: wrap;
 }
-.input{
-  min-width: 200px;
-  width: auto;
-  margin-right: 20px;
-  height: 40px;
-  padding-left: 10px;
-  font-size: 16px;
-  border-radius: 20px;
-  border: 2px solid grey;
-  outline: none;
-  box-shadow: none;
-  font-weight: bold;
-}
-.input:nth-child(1){
-  min-width: 300px;
-}
+
